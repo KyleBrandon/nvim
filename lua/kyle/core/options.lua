@@ -1,7 +1,6 @@
 vim.cmd.filetype = "plugin on"
 vim.cmd.syntax = "on"
 
-
 -- set leader key to spacea
 vim.g.mapleader = " "
 
@@ -42,7 +41,6 @@ opt.listchars = { tab = "»·", trail = "·", nbsp = "␣" } -- set invisible ch
 
 -- appearance
 
--- turn on termguicolors for nightfly colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
@@ -59,7 +57,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 opt.iskeyword:append("-") -- consider string-string as whole word
 
-opt.foldcolumn = "1"
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
+-- Decrease update time
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300

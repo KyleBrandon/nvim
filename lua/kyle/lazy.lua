@@ -16,13 +16,6 @@ require("lazy").setup({
     { import = "kyle.plugins.lsp" },
 }, {
     install = {
-        colorscheme = { "nightfly" },
-    },
-    checker = {
-        enabled = true,
-        notify = false,
-    },
-    change_detection = {
-        notify = false
+        colorscheme = { "rose-pine" },
     },
 })

@@ -1,7 +1,7 @@
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
-        "nvim-tree/nvim-web-devicons"
+        "nvim-tree/nvim-web-devicons",
     },
     config = function()
         -- import nvim-tree plugin safely
@@ -75,8 +75,8 @@ return {
 
         -- nvim-tree keymaps
         local keymap = vim.keymap
-        keymap.set("n", "<leader>et", ":NvimTreeToggle<CR>")  -- toggle file explorer
-        keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>")   -- toggle file explorer on current file
+        keymap.set("n", "<leader>et", ":NvimTreeToggle<CR>") -- toggle file explorer
+        keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>") -- toggle file explorer on current file
         keymap.set("n", "<leader>er", ":NvimTreeRefresh<CR>") -- refresh file explorer
-    end
+    end,
 }

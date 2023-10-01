@@ -1,19 +1,20 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
         build = ":TSUpdate",
         dependencies = {
-            "windwp/nvim-ts-autotag",
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
             -- import nvim-treesitter plugin
             local treesitter = require("nvim-treesitter.configs")
 
             -- configure treesitter
-            treesitter.setup({ -- enable syntax highlighting
+            treesitter.setup({
+                -- enable syntax highlighting
                 highlight = {
                     enable = true,
+                    additional_vim_regex_highlighting = { "markdown" },
                 },
                 -- enable indentation
                 indent = { enable = true },
@@ -21,37 +22,28 @@ return {
                 autotag = { enable = true },
                 -- ensure these language parsers are installed
                 ensure_installed = {
-                    "bash",
+                    "json",
+                    "javascript",
+                    "typescript",
+                    "rust",
                     "c",
                     "cpp",
-                    "css",
-                    "dockerfile",
-                    "gitignore",
-                    "graphql",
-                    "html",
                     "java",
-                    "javascript",
-                    "json",
-                    "lua",
+                    "yaml",
+                    "html",
+                    "css",
                     "markdown",
                     "markdown_inline",
-                    "ruby",
-                    "rust",
-                    "svelte",
-                    "tsx",
-                    "typescript",
+                    "bash",
+                    "lua",
                     "vim",
-                    "xml",
-                    "yaml",
-                },
-                -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false,
+                    "dockerfile",
+                    "gitignore",
                 },
                 -- auto install above language parsers
                 auto_install = true,
             })
+
         end,
     },
 }
