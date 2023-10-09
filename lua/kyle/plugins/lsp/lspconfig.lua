@@ -4,6 +4,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
+        "simrat39/rust-tools.nvim",
         -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
         { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
     },
@@ -64,6 +65,28 @@ return {
         --   define the property `filetypes` in the override table.
         local servers = {
             rust_analyzer = {
+                tools = {
+                    autoSetHints = true,
+                    inlay_hints = {
+                        show_parameter_hints = true,
+                        parameter_hints_prefix = "",
+                        other_hints_prefix = "",
+                    },
+                },
+                checkOnSave = {
+                    allFeatures = true,
+                    overrideCommnad = {
+                        "cargo",
+                        "clippy",
+                        "--workspace",
+                        "--message-format=json",
+                        "--all-targets",
+                        "--all-features",
+                        "--",
+                        "-D",
+                        "warnings",
+                    },
+                },
                 settings = {
                     ["rust-analyzer"] = {
                         cargo = {
@@ -73,6 +96,19 @@ return {
                         },
                         procMacro = {
                             enable = true,
+                        },
+                        inlay_hints = {
+                            lifetimeElisionHints = {
+                                enabled = true,
+                                useParameterNames = true,
+                            },
+                        },
+                        checkOnSave = {
+                            command = "clippy",
+                        },
+                        assist = {
+                            importEnforceGranularity = true,
+                            importPrefix = "crate",
                         },
                     },
                 },
@@ -130,12 +166,30 @@ return {
         })
 
         for server_name, server_config in pairs(servers) do
-            lspconfig[server_name].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = (server_config or {}).settings,
-                filetypes = (server_config or {}).filetypes,
-            })
+            local settings = (server_config or {}).settings
+            local filetypes = (server_config or {}).filetypes
+            local tools = (server_config or {}).tools
+            local checkOnSave = (server_config or {}).checkOnSave
+
+            if server_name == "rust_analyzer" then
+                require("rust-tools").setup({
+                    tools = tools,
+                    checkOnSave = checkOnSave,
+                    server = {
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                        settings = settings,
+                        filetypes = filetypes,
+                    },
+                })
+            else
+                lspconfig[server_name].setup({
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                    settings = settings,
+                    filetypes = filetypes,
+                })
+            end
         end
 
         -- format buffer

@@ -14,7 +14,7 @@ return {
                 -- enable syntax highlighting
                 highlight = {
                     enable = true,
-                    additional_vim_regex_highlighting = { "markdown" },
+                    additional_vim_regex_highlighting = false,
                 },
                 -- enable indentation
                 indent = { enable = true },
@@ -22,28 +22,29 @@ return {
                 autotag = { enable = true },
                 -- ensure these language parsers are installed
                 ensure_installed = {
-                    "json",
-                    "javascript",
-                    "typescript",
-                    "rust",
+                    "bash",
                     "c",
                     "cpp",
-                    "java",
-                    "yaml",
-                    "html",
                     "css",
-                    "markdown",
-                    "markdown_inline",
-                    "bash",
-                    "lua",
-                    "vim",
                     "dockerfile",
                     "gitignore",
+                    "html",
+                    "java",
+                    "javascript",
+                    "json",
+                    "lua",
+                    "markdown",
+                    "markdown_inline",
+                    "rust",
+                    "toml",
+                    "tsx",
+                    "typescript",
+                    "vim",
+                    "yaml",
                 },
                 -- auto install above language parsers
                 auto_install = true,
             })
-
         end,
     },
 }
